@@ -8,8 +8,15 @@
 
 The `gid-list-concepts` element is a data component acting as a wrapper  on gid-api used for handling rest calls for concepts.
 
-<gid-list-concepts api-url='https://ql50yzu0fj.execute-api.us-east-1.amazonaws.com/dev' user-id='1' concepts={{concepts}} >
+<gid-list-concepts
+		 api-url='https://ql50yzu0fj.execute-api.us-east-1.amazonaws.com/dev'
+ 		user-id='1'
+  		concepts='{{concepts}}'>
 </gid-list-concepts> 
+
+The field 'userId' is mandatory.
+
+If 'apiUrl' is not provided, then the component would fetch sample data from mock json.
 
 @demo demo/index.html
 -->
@@ -64,9 +71,15 @@ The `gid-list-concepts` element is a data component acting as a wrapper  on gid-
      	        }
         },
         userIdModified:  function(){
-        	this.conceptsUrl = this.apiUrl + '/concepts';
-        	this.conceptsParams = this.params= JSON.stringify({
-	        	  "userId": this.userId});
+        	if(!this.apiUrl){
+        		this.conceptsUrl =   this.importPath + 'assets/' + 'concepts.json';
+        		
+        	}
+        	else{
+        		this.conceptsUrl = this.apiUrl + '/concepts';
+            	this.conceptsParams = this.params= JSON.stringify({
+    	        	  "userId": this.userId});
+        	}
         },
         conceptsResponseChanged : function(newvalue, oldvalue){
             this.concepts = [];

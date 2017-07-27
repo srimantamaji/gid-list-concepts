@@ -1,5 +1,7 @@
 # \<gid-list-concepts\>
+In this component, usedID is a mandatory parameter. 
 
+If 'apiUrl' is not provided, then the component would fetch sample data from mock json.
 
 
 ## Install the Polymer-CLI
