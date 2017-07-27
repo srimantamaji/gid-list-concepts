@@ -1,4 +1,6 @@
 # \<gid-list-concepts\>
+This component is used for fetching the list of concepts against a particular user.
+
 In this component, usedID is a mandatory parameter. 
 
 If 'apiUrl' is not provided, then the component would fetch sample data from mock json.
