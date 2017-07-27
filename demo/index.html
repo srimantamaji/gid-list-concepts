@@ -15,7 +15,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <link rel="import" href="../gid-list-concepts.html">
     <style>
-    </style>
+	  	table, th, td {
+	    border: 1px solid grey;
+	    border-collapse: collapse;
+		}
+		td {
+		    text-align: center;
+		}
+  	</style>
 </head>
 <body unresolved>
 <h1>Concepts</h1>
@@ -23,11 +30,44 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <div class="horizontal-section-container">
     <template is="dom-bind" id="app">
         <gid-list-concepts api-url='https://ql50yzu0fj.execute-api.us-east-1.amazonaws.com/dev' user-id='1' concepts='{{concepts}}'></gid-list-concepts>
-        <template is="dom-repeat" items="[[concepts]]">
+            <template is="dom-if" if="[[concepts.length]]">
             <div class="horizontal-section">
-                <p>{{item.label}}</p>
+                <table style="width:100%">
+				  <tr>
+				    <th>Concept</th>
+				    <th>Owner</th>
+				    <th>Predicted Columns</th>
+				    <th>Confirmed Columns</th>
+				    <th>ETA</th>
+				    <th>Coverage</th>
+				    <th>Impact Area</th> 
+				    <th>Classification Accuracy Percentage</th>
+				    <th>Applications</th>
+				  </tr>
+				  <template is="dom-repeat" items="[[concepts]]">
+				  <tr>
+				    <td>{{item.label}}</td>
+				    <td>{{item.owner.label}}</td>
+				    <td>{{item.predictedColumns}}</td>
+				    <td>{{item.confirmedColumns}}</td>
+				    <td>{{item.eta}}</td>
+				    <td>{{item.coverage}}</td>				    
+				    <td>
+				     <template is="dom-repeat" items="[[item.impactArea]]">
+				     	{{item.label}} &nbsp;
+				     </template>
+				    </td> 
+				    <td>{{item.classificationAccuracyPercentage}}</td>	    
+				    <td>
+				     <template is="dom-repeat" items="[[item.applications]]">
+				     	{{item.label}} &nbsp;
+				     </template>
+				    </td>
+				  </tr>
+				 </template>
+				</table>
             </div>
-        </template>
+            </template>
     </template>
 </div>
 
