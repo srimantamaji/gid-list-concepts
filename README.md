@@ -1,4 +1,4 @@
-# \<gid-list-lob-concepts\>
+# \<gid-list-concepts\>
 
 
 
