@@ -1,9 +1,71 @@
-# \<gid-list-concepts\>
-This component is used for fetching the list of concepts against a particular user.
+## gid-list-concepts
 
-In this component, usedID is a mandatory parameter. 
+A data component to get list of concepts and its metadata for given user id
 
-If 'apiUrl' is not provided, then the component would fetch sample data from mock json.
+    <gid-list-concepts userId='1'></<gid-list-concepts>
+
+API endpoint:
+
+    GET /concepts
+
+Input:
+
+- User Id
+
+Output:
+
+- List of concepts with key metadata (items being displayed on listing page)
+
+
+The output of this components will be as follows:
+
+    {
+      "concepts": [
+        {
+          "id": "100462",
+          "label": "CASE-NUMBER",
+          "owner": {
+            "id": "111001",
+            "label": "Angela"
+          },
+          "predictedColumns": 0,
+          "confirmedColumns": 0,
+          "eta": 0,
+          "coverage": 0,
+          "impactArea": [
+            {
+              "id": "120002",
+              "label": "Credit Risk"
+            },
+            {
+              "id": "120001",
+              "label": "GDPR"
+            }
+          ],
+          "classificationAccuracyPercentage": 5,
+          "applications": [
+            {
+              "id": "100492",
+              "label": "Universal Biller"
+            },
+            {
+              "id": "100252",
+              "label": "Supplier Management Program"
+            },
+            {
+              "id": "100495",
+              "label": "Field Service Support"
+            },
+            {
+              "id": "100447",
+              "label": "Contract Mgmt System"
+            }
+          ]
+        }    
+      ]
+    }
+
+
 
 
 ## Install the Polymer-CLI
