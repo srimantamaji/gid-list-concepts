@@ -23,10 +23,14 @@ If 'apiUrl' is not provided, then the component would fetch sample data from moc
 -->
 <dom-module id="gid-list-concepts">
   <template>
+ 		 <!-- fetch entity path  -->
+        	<gid-api entity = '{{apiEntity}}' path='{{path}}'></gid-api>
+         <!--  fetch entity path -->
+         
          <!-- concepts -->	
-		<gid-api auto=false
-			method="GET" api-url={{conceptsUrl}} response='{{conceptsResponse}}'
-			api-timeout={{conceptsTimeout}} api-params={{conceptsParams}}> </gid-api>			
+			<gid-api auto=false
+				method="GET" api-url={{conceptsUrl}} response='{{conceptsResponse}}'
+				api-timeout={{conceptsTimeout}} api-params={{conceptsParams}}></gid-api>			
 	    <!-- concepts -->
 
   </template>
@@ -64,22 +68,54 @@ If 'apiUrl' is not provided, then the component would fetch sample data from moc
      	          value: [],
      	          notify: true
      	        },
-     	       userId: {
+     	        user: {
      	        	type: String,
      	        	value : '',
-     	        	notify :  true,
-     	        	observer: 'userIdModified'
-     	        }
+     	        	notify :  true
+     	        },
+     	        entity: {
+                    type: String,
+                    notify: true,
+                    value: '',
+                    observer: 'entityModified'
+                },
+                path: {
+                	   type: String,
+                    notify: true,
+                    value: '',
+                    observer: 'pathReceived'
+                },
+                apiEntity: {
+                	   type: String,
+                    notify: true
+                }
         },
-        userIdModified:  function(){
-        	if(!this.apiUrl){
-        		this.conceptsUrl =   this.importPath + 'assets/' + 'concepts.json';
+        entityModified:  function(){
+        	if (this.entity) {
+        	 	if (!this.apiUrl) {
+	      			this.conceptsUrl = this.importPath + 'assets/json/' + this.entity.toLowerCase() + '.json';
+	                this.conceptsTimeout =  this.conceptsTimeout - 1;
+      			}
+        		else {
+         			this.apiEntity = this.entity;
+         		}
+         	}
+        },
+        pathReceived: function(){
+        	if(this.path){
+        		var res = this.path.split(/{([^}]+)}/);
+        		for (var i in res) {
+        			if(!res[i].startsWith("/")){
+        					if(this[res[i]]){
+        						res[i] = this[res[i]];
+        					}
+        			}
+        		}
+       			this.conceptsUrl = this.apiUrl + res.join("");
+       			this.conceptsParams = JSON.stringify({
+  	        	  "user": this.user});
+       			this.conceptsTimeout =  this.conceptsTimeout - 1;
         		
-        	}
-        	else{
-        		this.conceptsUrl = this.apiUrl + '/concepts';
-            	this.conceptsParams = this.params= JSON.stringify({
-    	        	  "userId": this.userId});
         	}
         },
         conceptsResponseChanged : function(newvalue, oldvalue){

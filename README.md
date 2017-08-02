@@ -2,7 +2,9 @@
 
 A data component to get list of concepts and its metadata for given user id
 
-    <gid-list-concepts userId='1'></<gid-list-concepts>
+    <gid-list-concepts user='1' entity= "LIST-CONCEPTS" concepts='{{concepts}}'></<gid-list-concepts>
+    
+The properties 'user' and 'entity' are mandatory.
 
 API endpoint:
 
@@ -10,7 +12,7 @@ API endpoint:
 
 Input:
 
-- User Id
+- User 
 
 Output:
 
