@@ -22,7 +22,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <div class="horizontal-section-container">
     <template is="dom-bind" id="app">
       <gid-api auto=false
-			http-method="get" api-url="../assets/test.json" response={{ajaxResponse}}
+			method="get" api-url="../assets/json/test.json" response={{ajaxResponse}}
 			api-timeout= 0  api-params='{"token": "AIzaSyAuecFZ9xJXbGDkQYWBmYrtzOGJD-iDIgI"}'> </gid-api>
 
         <template is="dom-repeat" items="[[ajaxResponse.items]]">
