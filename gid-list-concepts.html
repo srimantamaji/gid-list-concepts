@@ -71,14 +71,9 @@ If 'apiUrl' is not provided, then the component would fetch sample data from moc
      	        user: {
      	        	type: String,
      	        	value : '',
-     	        	notify :  true
+     	        	notify :  true,
+                    observer: 'userModified'
      	        },
-     	        entity: {
-                    type: String,
-                    notify: true,
-                    value: '',
-                    observer: 'entityModified'
-                },
                 path: {
                 	   type: String,
                     notify: true,
@@ -90,14 +85,14 @@ If 'apiUrl' is not provided, then the component would fetch sample data from moc
                     notify: true
                 }
         },
-        entityModified:  function(){
-        	if (this.entity) {
+        userModified:  function(){
+        	if (this.user) {
         	 	if (!this.apiUrl) {
 	      			this.conceptsUrl = this.importPath + 'assets/json/' + this.entity.toLowerCase() + '.json';
 	                this.conceptsTimeout =  this.conceptsTimeout - 1;
       			}
         		else {
-         			this.apiEntity = this.entity;
+         			this.apiEntity = 'LIST-CONCEPTS';
          		}
          	}
         },
