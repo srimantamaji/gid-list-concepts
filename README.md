@@ -12,7 +12,7 @@ API endpoint:
 
 Input:
 
-- User 
+- User (Query param)
 
 Output:
 
