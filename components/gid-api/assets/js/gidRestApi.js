@@ -15,6 +15,9 @@ var apis = {
 		"synonyms": "/columns/{column}/synonyms",
 		"patterns": "/columns/{column}/patterns",
 		"list-concepts": "/concepts",
-		"concept-details" : "/concepts/{concept}",
-		"curate-concept" : "/concepts/{concept}/curate"
-}
+		"concept-details": "/concepts/{concept}",
+		"curate-concept": "/concepts/{concept}/curate",
+		"create-concept": "/concepts",
+		"edit-concept": "/concepts/{concept}",
+		"remove-concept": "/concepts/{concept}"
+	}
