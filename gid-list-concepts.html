@@ -6,18 +6,75 @@
 <!--
 `gid-list-concepts`
 
-The `gid-list-concepts` element is a data component acting as a wrapper  on gid-api used
-for fetching the list of concepts against a particular user.
 
-<gid-list-concepts
-api-url='https://ql50yzu0fj.execute-api.us-east-1.amazonaws.com/dev'
-user-id='1'
-concepts='{{concepts}}'>
-</gid-list-concepts> 
+A data component to get list of concepts and its metadata for given user id
 
-The field 'userId' is mandatory.
+    <gid-list-concepts user='1' concepts='{{concepts}}'></<gid-list-concepts>
+    
+The property 'user' is mandatory.
 
 If 'apiUrl' is not provided, then the component would fetch sample data from mock json.
+
+API endpoint:
+
+    GET /concepts
+
+Input:
+
+- User (Query param)
+
+Output:
+
+- List of concepts with key metadata (items being displayed on listing page)
+
+
+The output of this components will be as follows:
+
+    {
+      "concepts": [
+        {
+          "id": "100462",
+          "label": "CASE-NUMBER",
+          "owner": {
+            "id": "111001",
+            "label": "Angela"
+          },
+          "predictedColumns": 0,
+          "confirmedColumns": 0,
+          "eta": 0,
+          "coverage": 0,
+          "impactArea": [
+            {
+              "id": "120002",
+              "label": "Credit Risk"
+            },
+            {
+              "id": "120001",
+              "label": "GDPR"
+            }
+          ],
+          "classificationAccuracyPercentage": 5,
+          "applications": [
+            {
+              "id": "100492",
+              "label": "Universal Biller"
+            },
+            {
+              "id": "100252",
+              "label": "Supplier Management Program"
+            },
+            {
+              "id": "100495",
+              "label": "Field Service Support"
+            },
+            {
+              "id": "100447",
+              "label": "Contract Mgmt System"
+            }
+          ]
+        }    
+      ]
+    }
 
 @demo demo/index.html
 -->
@@ -88,7 +145,7 @@ If 'apiUrl' is not provided, then the component would fetch sample data from moc
         userModified:  function(){
         	if (this.user) {
         	 	if (!this.apiUrl) {
-	      			this.conceptsUrl = this.importPath + 'assets/json/' + this.entity.toLowerCase() + '.json';
+	      			this.conceptsUrl = this.importPath + 'assets/json/list-concepts.json';
 	                this.conceptsTimeout =  this.conceptsTimeout - 1;
       			}
         		else {
