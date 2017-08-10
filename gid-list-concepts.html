@@ -9,7 +9,7 @@
 
 A data component to get list of concepts and its metadata for given user id
 
-    <gid-list-concepts user='1' concepts='{{concepts}}'></<gid-list-concepts>
+    <gid-list-concepts user='1' concepts='{{concepts}}'></gid-list-concepts>
     
 The property 'user' is mandatory.
 
@@ -125,6 +125,16 @@ The output of this components will be as follows:
      	          value: [],
      	          notify: true
      	        },
+     	      	limit: {
+               	   type: String,
+                   notify: true,
+                   value: ''
+                },
+                offset: {
+                	type: String,
+                	notify: true,
+                	value: ''
+                },
      	        user: {
      	        	type: String,
      	        	value : '',
@@ -132,15 +142,16 @@ The output of this components will be as follows:
                     observer: 'userModified'
      	        },
                 path: {
-                	   type: String,
+                	type: String,
                     notify: true,
                     value: '',
                     observer: 'pathReceived'
                 },
                 apiEntity: {
-                	   type: String,
+                	type: String,
                     notify: true
                 }
+                
         },
         userModified:  function(){
         	if (this.user) {
@@ -165,7 +176,9 @@ The output of this components will be as follows:
         		}
        			this.conceptsUrl = this.apiUrl + res.join("");
        			this.conceptsParams = JSON.stringify({
-  	        	  "user": this.user});
+  	        	  "user": this.user,
+  	        	  "offset": this.offset,
+  	        	  "limit": this.limit});
        			this.conceptsTimeout =  this.conceptsTimeout - 1;
         		
         	}

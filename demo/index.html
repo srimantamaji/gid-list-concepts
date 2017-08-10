@@ -29,7 +29,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <div class="horizontal-section-container">
     <template is="dom-bind" id="app">
-        <gid-list-concepts api-url='https://ql50yzu0fj.execute-api.us-east-1.amazonaws.com/dev' user='1' concepts='{{concepts}}'></gid-list-concepts>
+        <gid-list-concepts api-url='https://ql50yzu0fj.execute-api.us-east-1.amazonaws.com/dev' user='1' 
+        limit = '1000' offset = '0'
+        concepts='{{concepts}}'></gid-list-concepts>
             <template is="dom-if" if="[[concepts.length]]">
             <div class="horizontal-section">
                 <table style="width:100%">
